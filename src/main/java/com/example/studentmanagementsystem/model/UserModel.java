@@ -1,22 +1,21 @@
 package com.example.studentmanagementsystem.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Collection;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "student")
-
-public class StudentModel {
+@Document(collection = "users")
+public class UserModel {
     @Id
-    private String id;
+    private String Id;
 
-    private String name;
-    private Integer age;
     private String email;
+    private String password;
 }

@@ -97,5 +97,32 @@ public class StudentService {
 
 
     }
+    public StudentResponseDto patchStudent(String id, StudentRequestDto dto) {
+
+        StudentModel student = repository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+
+        // 🔹 Only update provided fields
+        if (dto.getName() != null && !dto.getName().isBlank()) {
+            student.setName(dto.getName());
+        }
+
+        if (dto.getAge() != null) {   // make age Integer, not int
+            student.setAge(dto.getAge());
+        }
+
+        if (dto.getEmail() != null && !dto.getEmail().isBlank()) {
+            student.setEmail(dto.getEmail());
+        }
+
+        StudentModel saved = repository.save(student);
+
+        return new StudentResponseDto(
+                saved.getId(),
+                saved.getName(),
+                saved.getAge(),
+                saved.getEmail()
+        );
+    }
 
 }
